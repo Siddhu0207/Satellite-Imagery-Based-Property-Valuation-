@@ -76,13 +76,13 @@ def upload_and_process(label_name):
     df.rename(columns={'latitude': 'lat', 'longitude': 'long'}, inplace=True)
 
     if 'lat' not in df.columns or 'long' not in df.columns:
-        print(f"❌ ERROR: Could not find lat/long columns in {file_name}")
+        print(f" ERROR: Could not find lat/long columns in {file_name}")
         return
 
     points = list(zip(df['lat'], df['long']))
     results = {"success": 0, "failed": 0, "skipped": 0}
 
-    print(f"🚀 Starting fast download for {len(points)} locations...")
+    print(f" Starting fast download for {len(points)} locations...")
 
     # Parallel Execution with Progress Bar
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
@@ -97,10 +97,10 @@ def upload_and_process(label_name):
 
     # Final Report for this file
     print(f"\n--- {label_name} Summary ---")
-    print(f"✅ Successfully Downloaded: {results['success']}")
-    print(f"⏭️  Already Existed (Skipped): {results['skipped']}")
+    print(f"Successfully Downloaded: {results['success']}")
+    print(f" Already Existed (Skipped): {results['skipped']}")
     if results['failed'] > 0:
-        print(f"❌ Failed Downloads: {results['failed']}")
+        print(f"Failed Downloads: {results['failed']}")
     print("-" * 30)
 
 # ---------------------------------------------------------
@@ -109,4 +109,4 @@ def upload_and_process(label_name):
 upload_and_process("TRAINING DATA")
 upload_and_process("TEST DATA")
 
-print("\n✨ ALL BLOCKS COMPLETE.")
+print("\n ALL BLOCKS COMPLETE.")
